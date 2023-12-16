@@ -1,6 +1,6 @@
 # Scripts
 
-- [massdnsParser.py](massdnsparserpy)
+- [massdnsParser.py](#massdnsparserpy)
 - [headersRecon.py](#headersreconpy)
 
 ## massdnsParser.py
