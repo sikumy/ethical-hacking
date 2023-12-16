@@ -106,6 +106,12 @@ usage: headersRecon.py [-h] -l LIST [-o OUTPUT]
 headersRecon.py: error: the following arguments are required: -l/--list
 
 ```
+#### Usage Example
+
+```
+python3 headersRecon.py -l webs.txt -o headers.json
+```
+
 Input File example:
 ```text
 https://example1.com/
