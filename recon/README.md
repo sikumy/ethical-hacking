@@ -353,6 +353,9 @@ options:
 python3 cnMap.py -l domains.txt --resolvers resolvers-trusted.txt -o domains_cname.json --csv domains_cname.csv
 ```
 
+You can obtain a list of trusted resolvers (resolvers-trusted.txt) at the following link:
+- [resolvers-trusted.txt](https://raw.githubusercontent.com/trickest/resolvers/main/resolvers-trusted.txt)
+
 ```sh
 python3 cnMap.py -l <(crtRecon -d hackerone.com) --resolvers resolvers-trusted.txt -o domains_cname.json --csv domains_cname.csv
 
