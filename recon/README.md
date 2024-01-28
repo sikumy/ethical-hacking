@@ -2,6 +2,7 @@
 
 - [massdnsParser.py](#massdnsparserpy)
 - [headersRecon.py](#headersreconpy)
+- [crtRecon.go](#crtRecongo)
 
 ## massdnsParser.py
 
@@ -231,3 +232,46 @@ cat webs_headers.txt | jq '.[].Server' | sort -u
 "openresty"
 "stgw"
 ```
+## crtRecon.go
+
+Script to perform a search for domains using certificates (crt.sh) either vertically or horizontally. It allows enumeration through a domain or organization name.
+
+### Installation
+
+```sh
+wget https://raw.githubusercontent.com/draco-0x6ba/ethical-hacking/main/recon/crtRecon.go
+go install ./crtRecon.go
+```
+
+### Usage
+
+```
+Usage of the program:
+  -d string
+        Domain name for the HTTP request
+  -o string
+        Output file to save the results (optional)
+  -org string
+        Organization name for the HTTP request
+```
+
+#### Usage Example
+
+Enumeration using a domain:
+```sh
+crtRecon -d "hackerone.com"
+```
+Enumeration using an organization name:
+```sh
+crtRecon -d "HackerOne Inc."
+```
+
+### Tip
+
+You can quickly obtain the organization names of domains using [tlsx](https://github.com/projectdiscovery/tlsx) tool from [ProjectDiscovery](https://github.com/projectdiscovery). Example:
+
+```sh
+crtRecon -d "hackerone.com" | tlsx -so
+```
+
+It's possible to discover new organization names associated with domains you already have, which you can then use for further searches.
