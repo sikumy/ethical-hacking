@@ -260,10 +260,46 @@ Usage of the program:
 Enumeration using a domain:
 ```sh
 crtRecon -d "hackerone.com"
+
+mta-sts.forwarding.hackerone.com
+support.hackerone.com
+*.hackerone.com
+go.hackerone.com
+www.hackerone.com
+mta-sts.managed.hackerone.com
+events.hackerone.com
+info.hackerone.com
+api.hackerone.com
+mta-sts.hackerone.com
+docs.hackerone.com
+gslink.hackerone.com
+links.hackerone.com
+hackerone.com
+design.hackerone.com
 ```
 Enumeration using an organization name:
 ```sh
 crtRecon -d "HackerOne Inc."
+
+phabricator.inverselink.com
+hacker.one
+proteus.inverselink.com
+withinsecurity.com
+ci.inverselink.com
+hackerone-ext-content.com
+bd1.inverselink.com
+info.hacker.one
+events.hackerone.com
+go.inverselink.com
+*.testserver.inverselink.com
+ma.hacker.one
+bd3.inverselink.com
+www.enorekcah.com
+attjira.inverselink.com
+go.hacker.one
+payments-production.inverselink.com
+enorekcah.com
+...
 ```
 
 ### Tip
@@ -271,7 +307,17 @@ crtRecon -d "HackerOne Inc."
 You can quickly obtain the organization names of domains using [tlsx](https://github.com/projectdiscovery/tlsx) tool from [ProjectDiscovery](https://github.com/projectdiscovery). Example:
 
 ```sh
-crtRecon -d "hackerone.com" | tlsx -so
+crtRecon -d "hackerone.com" | tlsx -so -silent
+
+mta-sts.managed.hackerone.com:443
+mta-sts.forwarding.hackerone.com:443
+mta-sts.hackerone.com:443
+gslink.hackerone.com:443
+docs.hackerone.com:443 [HackerOne Inc]
+api.hackerone.com:443 [HackerOne Inc.]
+hackerone.com:443 [HackerOne Inc.]
+www.hackerone.com:443 [HackerOne Inc.]
+support.hackerone.com:443
 ```
 
 It's possible to discover new organization names associated with domains you already have, which you can then use for further searches.
