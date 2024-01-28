@@ -1,8 +1,9 @@
 # Scripts
 
-- [massdnsParser.py](#massdnsparserpy)
-- [headersRecon.py](#headersreconpy)
-- [crtRecon.go](#crtRecongo)
+- [massdnsParser.py](#massdnsparserpy) - Convert MassDNS results into JSON format, separating it into different fields.
+- [headersRecon.py](#headersreconpy) - Collect all response headers from the list of websites provided to it.
+- [crtRecon.go](#crtRecongo) - Search for domains using certificates (Using domain or organization name)
+- [cnMap.py](#cnMappy) - Resolve CNAME records recursively from a list of domains.
 
 ## massdnsParser.py
 
@@ -321,3 +322,56 @@ support.hackerone.com:443
 ```
 
 It's possible to discover new organization names associated with domains you already have, which you can then use for further searches.
+
+## cnMap.py
+
+Resolve CNAME records recursively (default depth 5) from a list of domains.
+
+### Usage
+
+```sh
+usage: cnMap.py [-h] [-l FILE_PATH] [-o OUTPUT] [--csv CSV] [--resolvers RESOLVERS] [-d DEPTH]
+
+Resolve CNAME records recursively from a list of domains.
+
+options:
+  -h, --help            show this help message and exit
+  -l FILE_PATH, --list FILE_PATH
+                        Path to the file containing domains
+  -o OUTPUT, --output OUTPUT
+                        Path to the output file (optional)
+  --csv CSV             Path to the CSV output file (optional)
+  --resolvers RESOLVERS
+                        Path to the file containing DNS resolvers (optional)
+  -d DEPTH, --depth DEPTH
+                        Depth of recursive resolution (default: 5)
+```
+
+#### Usage Example
+
+```sh
+python3 cnMap.py -l domains.txt --resolvers resolvers-trusted.txt -o domains_cname.json --csv domains_cname.csv
+```
+
+```sh
+python3 cnMap.py -l <(crtRecon -d hackerone.com) --resolvers resolvers-trusted.txt -o domains_cname.json --csv domains_cname.csv
+
+{
+    "support.hackerone.com": [
+        "2fe254e58a0ea8096400b2fda121ee35.freshdesk.com.",
+        "fwfd-use1-lb208.freshdesk.com." <-- CNAME Record from 2fe254e58a0ea8096400b2fda121ee35.freshdesk.com
+    ],
+    "gslink.hackerone.com": [
+        "d3rxkn2g2bbsjp.cloudfront.net."
+    ],
+    "mta-sts.hackerone.com": [
+        "hacker0x01.github.io."
+    ],
+    "mta-sts.managed.hackerone.com": [
+        "hacker0x01.github.io."
+    ],
+    "mta-sts.forwarding.hackerone.com": [
+        "hacker0x01.github.io."
+    ]
+}
+```
